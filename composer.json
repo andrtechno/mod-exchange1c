@@ -12,7 +12,9 @@
             "homepage": "http://www.corner-cms.com/"
         }
     ],
-
+    "require": {
+        "panix/mod-shop": "*"
+    },
     "autoload": {
         "psr-4": {
             "panix\\mod\\exchange1c\\": ""
