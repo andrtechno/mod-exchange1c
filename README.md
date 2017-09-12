@@ -35,10 +35,7 @@ to the require section of your `composer.json` file.
         'exchange1c' => ['class' => 'panix\mod\exchange1c\Module'],
     ],
 ```
-#### Migrate
-```
-php yii migrate --migrationPath=vendor/panix/mod-exchange1c/migrations
-```
+
 
 > [![CORNER CMS!](https://commerce.corner-cms.com/placeholder?size=100x100&text=f002&fg=333&padding=0 "CORNER CMS")](https://corner-cms.com)  
 <i>Content Management System "CORNER CMS"</i>  
