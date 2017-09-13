@@ -2,7 +2,9 @@
 
 namespace panix\mod\exchange1c\controllers\admin;
 
+use Yii;
 use panix\engine\controllers\AdminController;
+use panix\mod\exchange1c\models\SettingsForm;
 
 class DefaultController extends AdminController {
 

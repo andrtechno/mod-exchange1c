@@ -10,11 +10,11 @@ Yii::import('mod.shop.models.ShopTypeAttribute');
 Yii::import('mod.shop.models.ShopAttributeOption');
 Yii::import('mod.shop.models.ShopManufacturer');
 
-
+use yii\base\Component;
 /**
  * Imports products from XML file
  */
-class C1ProductsImport extends CComponent {
+class C1ProductsImport extends Component {
 
     /**
      * ID of the ShopType model to apply to new attributes and products
@@ -53,8 +53,8 @@ class C1ProductsImport extends CComponent {
      */
     public function commandCatalogCheckauth() {
         echo "success\n";
-        echo Yii::app()->session->sessionName . "\n";
-        echo Yii::app()->session->sessionId . "\n";
+        echo Yii::$app->session->sessionName . "\n";
+        echo Yii::$app->session->sessionId . "\n";
     }
 
     /**
@@ -71,7 +71,7 @@ class C1ProductsImport extends CComponent {
      * Save file
      */
     public function commandCatalogFile() {
-        $fileName = Yii::app()->request->getQuery('filename');
+        $fileName = Yii::$app->request->getQueryParam('filename');
         $result = file_put_contents($this->buildPathToTempFile($fileName), file_get_contents('php://input'));
         if ($result !== false)
             echo "success\n";
@@ -82,7 +82,7 @@ class C1ProductsImport extends CComponent {
      */
     public function commandCatalogImport() {
         //Yii::log(__FUNCTION__, 'info', 'application');
-        $this->xml = $this->getXml(Yii::app()->request->getQuery('filename'));
+        $this->xml = $this->getXml(Yii::$app->request->getQueryParam('filename'));
         if (!$this->xml)
             return false;
 
@@ -109,7 +109,7 @@ class C1ProductsImport extends CComponent {
      * Import catalog products
      */
     public function importProducts() {
-        $config = Yii::app()->settings->get('exchange1c');
+        $config = Yii::$app->settings->get('exchange1c');
 
         foreach ($this->xml->{"Каталог"}->{"Товары"}->{"Товар"} as $product) {
 
@@ -164,7 +164,7 @@ class C1ProductsImport extends CComponent {
 
 
 
-            if ($model->save(false, false, false)) {
+            if ($model->save(false)) {
                 Yii::log('product saved success', 'info', 'application');
             } else {
                 //  print_r($model->getErrors());
@@ -181,7 +181,7 @@ class C1ProductsImport extends CComponent {
             $categoryId = C1ExternalFinder::getObject(C1ExternalFinder::OBJECT_TYPE_CATEGORY, $product->{"Группы"}->{"Ид"}, false);
 
 
-            //if (Yii::app()->settings->get('shop', 'auto_add_subcategories')) {
+            //if (Yii::$app->settings->get('shop', 'auto_add_subcategories')) {
             if (is_numeric($categoryId)) {
                 $category1 = ShopCategory::model()
                         ->findByPk($categoryId);
@@ -248,7 +248,7 @@ class C1ProductsImport extends CComponent {
             if ($product) {
                 $product->price = $offer->{"Цены"}->{"Цена"}->{"ЦенаЗаЕдиницу"};
                 $product->quantity = 1;//$offer->{"Количество"};
-                $product->save(false, false, false);
+                $product->save(false);
             }
         }
     }
@@ -260,7 +260,7 @@ class C1ProductsImport extends CComponent {
      */
     public function addOptionToAttribute($attribute_id, $value) {
         // Add option
-        $option = new ShopAttributeOption;
+        $option = new AttributeOption;
         $option->attribute_id = $attribute_id;
         $option->value = $value;
         $option->save(false, false, false);
@@ -281,17 +281,17 @@ class C1ProductsImport extends CComponent {
 
             if (!$model) {
                 // Create new attribute
-                $model = new ShopAttribute;
+                $model = new Attribute;
                 $model->title = $attribute->{"Наименование"};
                 $model->name = CMS::translit($model->title);
-                $model->type = ShopAttribute::TYPE_DROPDOWN;
+                $model->type = Attribute::TYPE_DROPDOWN;
                 $model->use_in_filter = $useInFilter;
                 $model->select_many = true;
                 $model->display_on_front = true;
 
                 if ($model->save()) {
                     // Add to type
-                    $typeAttribute = new ShopTypeAttribute;
+                    $typeAttribute = new TypeAttribute;
                     $typeAttribute->type_id = self::DEFAULT_TYPE;
                     $typeAttribute->attribute_id = $model->id;
                     $typeAttribute->save();
@@ -393,7 +393,7 @@ class C1ProductsImport extends CComponent {
      * @param $externalId
      */
     public function createExternalId($type, $id, $externalId) {
-        Yii::app()->db->createCommand()->insert('{{exchange1c}}', array(
+        Yii::$app->db->createCommand()->insert('{{%exchange1c}}', array(
             'object_type' => $type,
             'object_id' => $id,
             'external_id' => $externalId
@@ -419,7 +419,7 @@ class C1ProductsImport extends CComponent {
     }
 
     private function setMessage($message_code) {
-        return Yii::app()->name . ': ' . iconv('UTF-8', 'windows-1251', Yii::t('Exchange1cModule.default', $message_code));
+        return Yii::$app->name . ': ' . iconv('UTF-8', 'windows-1251', Yii::t('exchange1c/default', $message_code));
     }
 
 }

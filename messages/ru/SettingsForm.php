@@ -10,8 +10,6 @@ return [
     'DELETION_PRODUCT_FLAG' => 'ПометкаУдаление товара',
     'DELETION_PRODUCT_FLAG_DEL' => 'Удаление товара с базы данных',
     'DELETION_PRODUCT_FLAG_SWITCH' => 'Скрывать товар',
-    
     'DELETION_ATTRIBUTE_FLAG' => 'ПометкаУдаление удаление с базы данных свойств',
-
 ];
 

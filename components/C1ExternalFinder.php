@@ -18,9 +18,9 @@ class C1ExternalFinder {
      * @param bool $loadModel
      */
     public static function getObject($type, $externalId, $loadModel = true) {
-        $query = Yii::app()->db->createCommand()
+        $query = Yii::$app->db->createCommand()
                 ->select("*")
-                ->from('{{exchange1c}}')
+                ->from('{{%exchange1c}}')
                 ->where('object_type=:type AND external_id=:externalId', array(
                     ':type' => $type,
                     ':externalId' => $externalId
@@ -58,8 +58,8 @@ class C1ExternalFinder {
     }
 
     public static function removeObject($type, $external_id) {
-        $query = Yii::app()->db->createCommand()
-                ->from('{{exchange1c}}')
+        $query = Yii::$app->db->createCommand()
+                ->from('{{%exchange1c}}')
                 ->where('object_type=:type AND external_id=:external_id', array(
                     ':type' => $type,
                     ':external_id' => $external_id
@@ -70,8 +70,8 @@ class C1ExternalFinder {
     }
     
         public static function removeObjectByPk($type, $obj_id) {
-        $query = Yii::app()->db->createCommand()
-                ->from('{{exchange1c}}')
+        $query = Yii::$app->db->createCommand()
+                ->from('{{%exchange1c}}')
                 ->where('object_type=:type AND object_id=:obj_id', array(
                     ':type' => $type,
                     ':obj_id' => $obj_id

@@ -2,6 +2,7 @@
 
 namespace panix\mod\exchange1c;
 
+use Yii;
 use panix\engine\WebModule;
 
 class Module extends WebModule {
@@ -23,6 +24,16 @@ class Module extends WebModule {
                 ),
             ),
         );
+    }
+    public function getInfo() {
+        return [
+            'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
+            'author' => 'andrew.panix@gmail.com',
+            'version' => '1.0',
+            'icon' => 'icon-1c',
+            'description' => Yii::t('exchange1c/default', 'MODULE_DESC'),
+            'url' => ['/admin/exchange1c'],
+        ];
     }
 
 }

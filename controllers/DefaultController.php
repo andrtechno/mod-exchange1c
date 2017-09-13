@@ -15,12 +15,12 @@ class DefaultController extends WebController {
         if ($request->getQueryParam('password') != $config['password'])
             exit('ERR_WRONG_PASS');
 
-        if ($request->userHostAddress != $config['ip']) {
+        if ($request->getUserIP() != $config['ip']) {
             exit('ERR_WRONG_IP');
         }
 
-        if ($request->getQuery('type') && $request->getQuery('mode'))
-            C1ProductsImport::processRequest($request->getQuery('type'), $request->getQuery('mode'));
+        if ($request->getQueryParam('type') && $request->getQueryParam('mode'))
+            C1ProductsImport::processRequest($request->getQueryParam('type'), $request->getQueryParam('mode'));
     }
 
 }
