@@ -2,6 +2,7 @@
 
 namespace panix\mod\exchange1c\controllers;
 
+use Yii;
 use panix\engine\controllers\WebController;
 use panix\mod\exchange1c\components\C1ProductsImport;
 
@@ -13,10 +14,10 @@ class DefaultController extends WebController {
 
 
         if ($request->getQueryParam('password') != $config['password'])
-            exit('ERR_WRONG_PASS');
+            exit(Yii::t('exchange1c/default', 'ERR_WRONG_PASS'));
 
         if ($request->getUserIP() != $config['ip']) {
-            exit('ERR_WRONG_IP');
+            exit(Yii::t('exchange1c/default', 'ERR_WRONG_IP'));
         }
 
         if ($request->getQueryParam('type') && $request->getQueryParam('mode'))

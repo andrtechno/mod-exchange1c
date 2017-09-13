@@ -6,8 +6,8 @@ use panix\engine\SettingsModel;
 
 class SettingsForm extends SettingsModel {
 
-    protected $category = 'cart';
-    protected $module = 'cart';
+    protected $category = 'exchange1c';
+    protected $module = 'exchange1c';
     public $ip;
     public $password;
     public $deletion_product_flag;
