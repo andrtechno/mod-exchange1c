@@ -7,6 +7,7 @@ use panix\engine\WebModule;
 
 class Module extends WebModule {
 
+    public $icon = 'icon-1c';
     public $routes = [
         'exchange1c/<password>' => 'exchange1c/default/index',
         'exchange1c/<password>/*' => 'exchange1c/default/index',
@@ -25,6 +26,7 @@ class Module extends WebModule {
             ),
         );
     }
+
     public function getInfo() {
         return [
             'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
