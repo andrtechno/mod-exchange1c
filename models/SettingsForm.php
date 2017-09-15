@@ -6,7 +6,6 @@ use panix\engine\SettingsModel;
 
 class SettingsForm extends SettingsModel {
 
-    protected $category = 'exchange1c';
     protected $module = 'exchange1c';
     public $ip;
     public $password;

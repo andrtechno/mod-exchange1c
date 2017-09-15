@@ -25,7 +25,11 @@ class Module extends WebModule {
             ],
         ];
     }
-
+    public function getAdminSidebar() {
+        $mod = new \panix\engine\widgets\nav\Nav;
+        $items = $mod->findMenu('shop');
+        return $items['items'];
+    }
     public function getInfo() {
         return [
             'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
