@@ -34,23 +34,23 @@ class C1ExternalFinder {
         if ($loadModel === true && $query['object_id']) {
             switch ($type) {
                 case self::OBJECT_TYPE_CATEGORY:
-                    return ShopCategory::model()->findByPk($query['object_id']);
+                    return Category::model()->findByPk($query['object_id']);
                     break;
 
                 case self::OBJECT_TYPE_ATTRIBUTE:
-                    return ShopAttribute::model()->findByPk($query['object_id']);
+                    return Attribute::model()->findByPk($query['object_id']);
                     break;
 
                 case self::OBJECT_TYPE_PRODUCT:
-                    return ShopProduct::model()->findByPk($query['object_id']);
+                    return Product::model()->findByPk($query['object_id']);
                     break;
 
                 case self::OBJECT_TYPE_MANUFACTURER:
-                    return ShopManufacturer::model()->findByPk($query['object_id']);
+                    return Manufacturer::model()->findByPk($query['object_id']);
                     break;
                 
                 case self::OBJECT_TYPE_ATTRIBUTE_OPTION:
-                    return ShopAttributeOption::model()->findByPk($query['object_id']);
+                    return AttributeOption::model()->findByPk($query['object_id']);
                     break;
             }
         }

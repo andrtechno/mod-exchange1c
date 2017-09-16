@@ -1,14 +1,6 @@
 <?php
 namespace panix\mod\exchange1c\components;
 
-Yii::import('mod.exchange1c.components.C1ExternalFinder');
-Yii::import('mod.exchange1c.components.C1ProductImage');
-Yii::import('mod.shop.models.ShopCategory');
-Yii::import('mod.shop.models.ShopProduct');
-Yii::import('mod.shop.models.ShopAttribute');
-Yii::import('mod.shop.models.ShopTypeAttribute');
-Yii::import('mod.shop.models.ShopAttributeOption');
-Yii::import('mod.shop.models.ShopManufacturer');
 
 use yii\base\Component;
 /**
@@ -32,7 +24,7 @@ class C1ProductsImport extends Component {
     protected $xml;
 
     /**
-     * @var ShopCategory
+     * @var Category
      */
     protected $_rootCategory;
 
@@ -125,7 +117,7 @@ class C1ProductsImport extends Component {
             }
 
             if (!$model) {
-                $model = new ShopProduct;
+                $model = new Product;
                 $model->type_id = self::DEFAULT_TYPE;
                 $model->price = 0;
                 $model->switch = 1;
@@ -153,7 +145,7 @@ class C1ProductsImport extends Component {
 
                 $manufacturer = C1ExternalFinder::getObject(C1ExternalFinder::OBJECT_TYPE_MANUFACTURER, $product->{"Изготовитель"}->{"Ид"});
                 if (!$manufacturer) {
-                    $manufacturer = new ShopManufacturer;
+                    $manufacturer = new Manufacturer;
                     $manufacturer->name = $product->{"Изготовитель"}->{"Наименование"};
                     $manufacturer->seo_alias = CMS::translit($manufacturer->name);
                     $manufacturer->save(false, false, false);
@@ -183,7 +175,7 @@ class C1ProductsImport extends Component {
 
             //if (Yii::$app->settings->get('shop', 'auto_add_subcategories')) {
             if (is_numeric($categoryId)) {
-                $category1 = ShopCategory::model()
+                $category1 = Category::model()
                         ->findByPk($categoryId);
 
                 $categories = array();
@@ -329,7 +321,7 @@ class C1ProductsImport extends Component {
 
     /**
      * @param $data
-     * @param null|ShopCategory $parent
+     * @param null|Category $parent
      */
     public function importCategories($data, $parent = null) {
         foreach ($data->{"Группа"} as $category) {
@@ -337,7 +329,7 @@ class C1ProductsImport extends Component {
             $model = C1ExternalFinder::getObject(C1ExternalFinder::OBJECT_TYPE_CATEGORY, $category->{"Ид"});
 
             if (!$model) {
-                $model = new ShopCategory;
+                $model = new Category;
                 $model->name = $category->{"Наименование"};
                 $model->seo_alias = CMS::translit($category->{"Наименование"});
                 $model->appendTo($this->getRootCategory());
@@ -372,12 +364,12 @@ class C1ProductsImport extends Component {
     }
 
     /**
-     * @return ShopCategory
+     * @return Category
      */
     public function getRootCategory() {
         if ($this->_rootCategory)
             return $this->_rootCategory;
-        $this->_rootCategory = ShopCategory::model()->findByPk(1);
+        $this->_rootCategory = Category::model()->findByPk(1);
         if ($this->_rootCategory) {
             return $this->_rootCategory;
         } else {
