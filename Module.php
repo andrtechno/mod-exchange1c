@@ -1,5 +1,5 @@
 <?php
-
+/**/
 namespace panix\mod\exchange1c;
 
 use Yii;

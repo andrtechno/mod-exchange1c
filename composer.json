@@ -1,16 +1,16 @@
 {
     "name": "panix/mod-exchange1c",
     "description": "Module exchange1c",
-    "keywords": ["corner-cms", "module", "exchange1c"],
+    "keywords": ["pixelion-cms", "module", "exchange1c"],
     "homepage": "https://github.com/andrtechno/mod-exchange1c",
     "type": "yii2-extension",
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
         {
-            "name": "CORNER CMS",
-            "email": "dev@corner-cms.com",
-            "homepage": "http://www.corner-cms.com/"
+            "name": "PIXELION CMS",
+            "email": "dev@pixelion.com.ua",
+            "homepage": "https://pixelion.com.ua"
         }
     ],
     "require": {
