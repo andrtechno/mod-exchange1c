@@ -11,7 +11,7 @@ class DefaultController extends WebController {
     public function behaviors() {
         return [
             'basicAuth' => [
-                'class' => \yii\filters\auth\HttpBasicAuth::className(),
+                'class' => \yii\filters\auth\HttpBasicAuth::class,
                 'auth' => function ($username, $password) {
                     $user = \panix\mod\user\models\User::find()->where(['username' => $username])->one();
                     if ($user->verifyPassword($password)) {
