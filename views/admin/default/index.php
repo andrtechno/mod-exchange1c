@@ -1,17 +1,10 @@
 <?php
 
 use panix\engine\Html;
-use yii\widgets\ActiveForm;
+use panix\engine\bootstrap\ActiveForm;
 ?>
 <?php
-$form = ActiveForm::begin([
-            //  'id' => 'form',
-            'options' => ['class' => 'form-horizontal'],
-            'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-sm-7\">{input}</div>\n<div class=\"col-sm-7 col-sm-offset-5\">{error}</div>",
-                'labelOptions' => ['class' => 'col-sm-5 control-label'],
-            ],
-        ]);
+$form = ActiveForm::begin();
 ?>
 <div class="card bg-light">
     <div class="card-header">
