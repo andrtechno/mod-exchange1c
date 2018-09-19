@@ -13,11 +13,11 @@ $form = ActiveForm::begin([
             ],
         ]);
 ?>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?= $this->context->pageName ?></h3>
+<div class="card bg-light">
+    <div class="card-header">
+        <h5><?= $this->context->pageName ?></h5>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <?= $form->field($model, 'ip') ?>
         <?= $form->field($model, 'password') ?>
         <?=
@@ -29,7 +29,7 @@ $form = ActiveForm::begin([
         <?= $form->field($model, 'deletion_attribute_flag')->checkBox(['label' => null])->label(); ?>
 
     </div>
-    <div class="panel-footer text-center">
+    <div class="card-footer text-center">
 
         <?= Html::submitButton(Html::icon('check') . ' ' . Yii::t('app', 'SAVE'), ['class' => 'btn btn-success']) ?>
 
