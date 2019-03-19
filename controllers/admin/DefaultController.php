@@ -13,7 +13,7 @@ class DefaultController extends AdminController {
         $this->pageName = Yii::t('exchange1c/default', 'MODULE_NAME');
         $this->breadcrumbs[] = [
             'label' => Yii::t('shop/default', 'MODULE_NAME'),
-            'url' => ['/admin/shop']
+            'url' => ['/shop']
         ];
         $this->breadcrumbs[] = $this->pageName;
 
