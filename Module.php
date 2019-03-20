@@ -1,43 +1,50 @@
 <?php
-/**/
+
 namespace panix\mod\exchange1c;
 
 use Yii;
 use panix\engine\WebModule;
 
-class Module extends WebModule {
+class Module extends WebModule
+{
 
     public $icon = '1c';
     public $routes = [
         'exchange1c/<password>' => 'exchange1c/default/index',
         'exchange1c/<password>/*' => 'exchange1c/default/index',
     ];
-    public function getAdminMenu() {
+
+    public function getAdminMenu()
+    {
         return [
             'shop' => [
                 'items' => [
                     [
                         'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
-                        'url' => ['/admin/exchange1c'],
-                          'icon' => $this->icon,
+                        'url' => ['/exchange1c'],
+                        'icon' => $this->icon,
                     ],
                 ],
             ],
         ];
     }
-    public function getAdminSidebar() {
+
+    public function getAdminSidebar()
+    {
         $mod = new \panix\engine\bootstrap\Nav;
         $items = $mod->findMenu('shop');
         return $items['items'];
     }
-    public function getInfo() {
+
+    public function getInfo()
+    {
         return [
             'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
             'author' => 'andrew.panix@gmail.com',
             'version' => '1.0',
             'icon' => 'icon-1c',
             'description' => Yii::t('exchange1c/default', 'MODULE_DESC'),
-            'url' => ['/admin/exchange1c'],
+            'url' => ['/exchange1c'],
         ];
     }
 
