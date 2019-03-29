@@ -19,10 +19,14 @@ class Module extends WebModule
         return [
             'shop' => [
                 'items' => [
-                    [
-                        'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
-                        'url' => ['/exchange1c'],
-                        'icon' => $this->icon,
+                    'integration' => [
+                        'items' => [
+                            [
+                                'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
+                                'url' => ['/exchange1c'],
+                                'icon' => $this->icon,
+                            ],
+                        ],
                     ],
                 ],
             ],
