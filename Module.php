@@ -23,7 +23,7 @@ class Module extends WebModule
                         'items' => [
                             [
                                 'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
-                                'url' => ['/exchange1c'],
+                                'url' => ['/admin/exchange1c'],
                                 'icon' => $this->icon,
                             ],
                         ],
@@ -44,9 +44,9 @@ class Module extends WebModule
             'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
             'author' => 'andrew.panix@gmail.com',
             'version' => '1.0',
-            'icon' => 'icon-1c',
+            'icon' => $this->icon,
             'description' => Yii::t('exchange1c/default', 'MODULE_DESC'),
-            'url' => ['/exchange1c'],
+            'url' => ['/admin/exchange1c'],
         ];
     }
 
