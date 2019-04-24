@@ -4,6 +4,7 @@ namespace panix\mod\exchange1c;
 
 use Yii;
 use panix\engine\WebModule;
+use panix\mod\admin\widgets\sidebar\BackendNav;
 
 class Module extends WebModule
 {
@@ -35,7 +36,7 @@ class Module extends WebModule
 
     public function getAdminSidebar()
     {
-        return (new \panix\engine\bootstrap\BackendNav)->findMenu('shop')['items'];
+        return (new BackendNav())->findMenu('shop')['items'];
     }
 
     public function getInfo()
