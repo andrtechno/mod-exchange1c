@@ -5,15 +5,27 @@ namespace panix\mod\exchange1c;
 use Yii;
 use panix\engine\WebModule;
 use panix\mod\admin\widgets\sidebar\BackendNav;
+use yii\base\BootstrapInterface;
 
-class Module extends WebModule
+/**
+ * Class Module
+ * @package panix\mod\exchange1c
+ */
+class Module extends WebModule implements BootstrapInterface
 {
 
     public $icon = '1c';
-    public $routes = [
-        'exchange1c/<password>' => 'exchange1c/default/index',
-        'exchange1c/<password>/*' => 'exchange1c/default/index',
-    ];
+
+    public function bootstrap($app)
+    {
+        $app->urlManager->addRules(
+            [
+                'exchange1c/<key:[0-9a-zA-Z\-]+>' => 'exchange1c/default/index',
+                'exchange1c/<key:[0-9a-zA-Z\-]+>/*' => 'exchange1c/default/index',
+            ],
+            true
+        );
+    }
 
     public function getAdminMenu()
     {

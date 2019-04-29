@@ -3,43 +3,53 @@
 namespace panix\mod\exchange1c\controllers;
 
 use Yii;
+use yii\web\Response;
 use panix\engine\controllers\WebController;
 use panix\mod\exchange1c\components\C1ProductsImport;
+use panix\mod\user\models\User;
 
-class DefaultController extends WebController {
+/**
+ * Class DefaultController
+ * @package panix\mod\exchange1c\controllers
+ */
+class DefaultController extends WebController
+{
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'basicAuth' => [
                 'class' => \yii\filters\auth\HttpBasicAuth::class,
                 'auth' => function ($username, $password) {
-                    $user = \panix\mod\user\models\User::find()->where(['username' => $username])->one();
+                    $user = User::find()->where(['username' => $username])->one();
+                    /** @var $user User */
                     if ($user->verifyPassword($password)) {
                         print_r($user);
-                        return die('basicAuth success');
+                        return 'basicAuth success';
                         return $user;
                     }
                     return null;
                 },
-                    ],
-                ];
-            }
+            ],
+        ];
+    }
 
-            public function actionIndex() {
-                $request = Yii::$app->request;
-                $config = Yii::$app->settings->get('exchange1c');
+    public function actionIndex($key)
+    {
+        $request = Yii::$app->request;
+        $config = Yii::$app->settings->get('exchange1c');
 
+        Yii::$app->response->format = Response::FORMAT_RAW;
 
-                if ($request->getQueryParam('password') != $config['password'])
-                    exit(Yii::t('exchange1c/default', 'ERR_WRONG_PASS'));
+        if ($key != $config->security_key)
+            return Yii::t('exchange1c/default', 'ERR_WRONG_PASS');
 
-                if ($request->getUserIP() != $config['ip']) {
-                    exit(Yii::t('exchange1c/default', 'ERR_WRONG_IP'));
-                }
-
-                if ($request->getQueryParam('type') && $request->getQueryParam('mode'))
-                    C1ProductsImport::processRequest($request->getQueryParam('type'), $request->getQueryParam('mode'));
-            }
-
+        if ($request->getUserIP() != $config->ip) {
+            return Yii::t('exchange1c/default', 'ERR_WRONG_IP');
         }
-        
+
+        if ($request->getQueryParam('type') && $request->getQueryParam('mode'))
+            C1ProductsImport::processRequest($request->getQueryParam('type'), $request->getQueryParam('mode'));
+    }
+
+}

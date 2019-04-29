@@ -1,11 +1,12 @@
 <?php
 return [
-    'TAB_CONNECT'=>'Подключение',
-    'TAB_OPTION'=>'Опции',
+    'TAB_CONNECT' => 'Подключение',
+    'TAB_OPTION' => 'Опции',
     'IPS' => 'Ip адреса',
+    'SECURITY_KEY' => 'Секретный ключ',
     'PASSWORD' => 'Пароль',
     'HINT_IP' => 'Укажите IP сервера 1C  с которого разрешено принимать подключения',
-    'HINT_PASS' => 'Сcылка импорта: <code>{host}/exchange1c/{password}</code>',
+    'HINT_URL' => 'Сcылка импорта: <code>{host}/exchange1c/<span id="security_key">{key}</span></code>',
     'DELETION_PRODUCT_FLAG' => '[ПометкаУдаление] товара',
     'DELETION_PRODUCT_FLAG_DEL' => 'Удаление товара с базы данных',
     'DELETION_PRODUCT_FLAG_SWITCH' => 'Скрывать товар',
