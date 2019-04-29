@@ -20,6 +20,8 @@ class DefaultController extends WebController
         return [
             'basicAuth' => [
                 'class' => \yii\filters\auth\HttpBasicAuth::class,
+                'only' => ['exchange'],
+                //'optional'=>['exchange'],
                 'auth' => function ($username, $password) {
                     $user = User::find()->where(['username' => $username])->one();
                     /** @var $user User */
@@ -34,7 +36,7 @@ class DefaultController extends WebController
         ];
     }
 
-    public function actionIndex($key)
+    public function actionExchange($key)
     {
         $request = Yii::$app->request;
         $config = Yii::$app->settings->get('exchange1c');

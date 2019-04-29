@@ -20,8 +20,8 @@ class Module extends WebModule implements BootstrapInterface
     {
         $app->urlManager->addRules(
             [
-                'exchange1c/<key:[0-9a-zA-Z\-]+>' => 'exchange1c/default/index',
-                'exchange1c/<key:[0-9a-zA-Z\-]+>/*' => 'exchange1c/default/index',
+                'exchange1c/<key:[0-9a-zA-Z\-]+>' => 'exchange1c/default/exchange',
+                'exchange1c/<key:[0-9a-zA-Z\-]+>/*' => 'exchange1c/default/exchange',
             ],
             true
         );
