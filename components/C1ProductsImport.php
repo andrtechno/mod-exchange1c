@@ -131,7 +131,7 @@ class C1ProductsImport extends Component {
             }
 
             $model->name = $product->{"Наименование"};
-            $model->seo_alias = CMS::translit($model->name);
+            $model->slug = CMS::translit($model->name);
             $model->sku = $product->{"Артикул"};
             $model->full_description = $product->{"Описание"};
             
@@ -147,7 +147,7 @@ class C1ProductsImport extends Component {
                 if (!$manufacturer) {
                     $manufacturer = new Manufacturer;
                     $manufacturer->name = $product->{"Изготовитель"}->{"Наименование"};
-                    $manufacturer->seo_alias = CMS::translit($manufacturer->name);
+                    $manufacturer->slug = CMS::translit($manufacturer->name);
                     $manufacturer->save(false, false, false);
                     $this->createExternalId(C1ExternalFinder::OBJECT_TYPE_MANUFACTURER, $manufacturer->id, $product->{"Изготовитель"}->{"Ид"});
                 }
@@ -331,7 +331,7 @@ class C1ProductsImport extends Component {
             if (!$model) {
                 $model = new Category;
                 $model->name = $category->{"Наименование"};
-                $model->seo_alias = CMS::translit($category->{"Наименование"});
+                $model->slug = CMS::translit($category->{"Наименование"});
                 $model->appendTo($this->getRootCategory());
                 $this->createExternalId(C1ExternalFinder::OBJECT_TYPE_CATEGORY, $model->id, $category->{"Ид"});
             }
