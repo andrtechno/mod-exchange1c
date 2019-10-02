@@ -9,6 +9,7 @@ use panix\engine\db\Migration;
  */
 class m170913_151246_exchange1c extends Migration
 {
+    public $settingsForm = 'panix\mod\exchange1c\models\SettingsForm';
 
     public function up()
     {
@@ -21,6 +22,7 @@ class m170913_151246_exchange1c extends Migration
 
         $this->createIndex('external_id', '{{%exchange1c}}', 'external_id', 0);
         $this->createIndex('object_type', '{{%exchange1c}}', 'object_type', 0);
+        $this->loadSettings();
     }
 
     public function down()
