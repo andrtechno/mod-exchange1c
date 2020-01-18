@@ -37,7 +37,7 @@ $(document).on("keyup","#settingsform-security_key",function(){
         </div>
         <div class="card-footer text-center">
 
-            <?= Html::submitButton(Html::icon('check') . ' ' . Yii::t('app', 'SAVE'), ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Html::icon('check') . ' ' . Yii::t('app/default', 'SAVE'), ['class' => 'btn btn-success']) ?>
 
         </div>
     </div>
