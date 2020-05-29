@@ -38,6 +38,7 @@ class Module extends WebModule implements BootstrapInterface
                                 'label' => Yii::t('exchange1c/default', 'MODULE_NAME'),
                                 'url' => ['/admin/exchange1c'],
                                 'icon' => $this->icon,
+                                'visible' => Yii::$app->user->can('/exchange1c/admin/default/index') || Yii::$app->user->can('/exchange1c/admin/default/*')
                             ],
                         ],
                     ],
